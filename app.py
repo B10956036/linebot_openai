@@ -24,7 +24,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = event.message.text
-    if re.match('蛇丸',message):
+    if re.match('早安',message):
         video_message = VideoSendMessage(
             original_content_url='https://i.imgur.com/XVmZmIE.mp4',
             preview_image_url='https://img.ttshow.tw/images/media/frontcover/2020/08/06/6.jpg'
