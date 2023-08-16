@@ -24,6 +24,22 @@ handler = WebhookHandler(os.getenv('518dde37ef19e2f9174d169a0e300bf8'))
 # OPENAI API Key初始化設定
 openai.api_key = os.getenv('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')
 
+# Channel Access Token
+channel_access_token = os.getenv('3XMzwMRo3nsij53LeDxRQp/sVC7OXS3D4HAdV2Cyslz6O50NlaQxzWarOU66W4wGpRgQMXXuleqnis+v94Mn8fQInMu1Bi1/aprLr+UMs/Kf8iK8NsgjYv5BF4CFkDPQFFL5/MW57mu6Uk4wR5iYFgdB04t89/1O/w1cDnyilFU=')
+if channel_access_token is None:
+    raise ValueError("Channel Access Token is not set correctly.")
+line_bot_api = LineBotApi(channel_access_token)
+
+# Channel Secret
+channel_secret = os.getenv('518dde37ef19e2f9174d169a0e300bf8')
+if channel_secret is None:
+    raise ValueError("Channel Secret is not set correctly.")
+handler = WebhookHandler(channel_secret)
+
+# OPENAI API Key初始化設定
+openai.api_key = os.getenv('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')
+if openai.api_key is None:
+    raise ValueError("OPENAI API Key is not set correctly.")
 
 def GPT_response(text):
     # 接收回應
