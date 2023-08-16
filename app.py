@@ -53,8 +53,15 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+    message = event.message.text
+    if re.match('蛇丸',message):
+        video_message = VideoSendMessage(
+            original_content_url='https://i.imgur.com/XVmZmIE.mp4',
+            preview_image_url='https://img.ttshow.tw/images/media/frontcover/2020/08/06/6.jpg'
+        )
+        line_bot_api.reply_message(event.reply_token, video_message)
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
         
         
 import os
