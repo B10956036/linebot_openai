@@ -23,11 +23,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = event.message.text
-    if re.match('早安',message):
+    message = text=event.message.text
+    if re.match('告訴我秘密',message):
         video_message = VideoSendMessage(
-            original_content_url='https://i.imgur.com/XVmZmIE.mp4',
-            preview_image_url='https://img.ttshow.tw/images/media/frontcover/2020/08/06/6.jpg'
+            original_content_url='https://i.imgur.com/1BnZGQC.mp4',
+            preview_image_url='https://i.imgur.com/wpM584d.jpg'
         )
         line_bot_api.reply_message(event.reply_token, video_message)
     else:
