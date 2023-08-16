@@ -18,7 +18,7 @@ import time
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
-line_bot_api = LineBotApi(os.getenv('k9z3dgBcqVzFl0oOT3ptjCYrhrfVISgsRy2zRusOFqNQlVov5ycpLFtlW3ZpNSdxpRgQMXXuleqnis+v94Mn8fQInMu1Bi1/aprLr+UMs/KKwhYdp+tWX+0XrUnMv2hVCP3NTOoppK957T7O36nJCgdB04t89/1O/w1cDnyilFU='))
+line_bot_api = LineBotApi(os.getenv('GUBTKGo9IN3dAiBMeiTCekl0urD7sKb5h03tDWxnLsoa73Ecl8RSVDlbfBlpWYFxpRgQMXXuleqnis+v94Mn8fQInMu1Bi1/aprLr+UMs/IW0QWQnF2u3UVBgM4MJZ4jyJ03dscimFa+jnPU1lgSZwdB04t89/1O/w1cDnyilFU='))
 # Channel Secret
 handler = WebhookHandler(os.getenv('518dde37ef19e2f9174d169a0e300bf8'))
 # OPENAI API Key初始化設定
