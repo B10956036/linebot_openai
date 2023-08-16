@@ -18,11 +18,11 @@ import time
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
-line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
+line_bot_api = LineBotApi(os.getenv('k9z3dgBcqVzFl0oOT3ptjCYrhrfVISgsRy2zRusOFqNQlVov5ycpLFtlW3ZpNSdxpRgQMXXuleqnis+v94Mn8fQInMu1Bi1/aprLr+UMs/KKwhYdp+tWX+0XrUnMv2hVCP3NTOoppK957T7O36nJCgdB04t89/1O/w1cDnyilFU='))
 # Channel Secret
-handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
+handler = WebhookHandler(os.getenv('518dde37ef19e2f9174d169a0e300bf8'))
 # OPENAI API Key初始化設定
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai.api_key = os.getenv('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')
 
 
 def GPT_response(text):
