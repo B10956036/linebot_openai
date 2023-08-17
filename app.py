@@ -55,8 +55,8 @@ def handle_message(event):
     message = event.message.text
     if re.match('影片',message):
         video_message = VideoSendMessage(
-            original_content_url='https://i.imgur.com/XVmZmIE.mp4',
-            preview_image_url='https://img.ttshow.tw/images/media/frontcover/2020/08/06/6.jpg'
+            original_content_url = baseurl + 'ch/output_1.mp4',
+            preview_image_url = baseurl + 'ch/image_0.jpg'
         )
         line_bot_api.reply_message(event.reply_token, video_message)
     else:
