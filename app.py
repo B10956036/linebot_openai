@@ -9,7 +9,7 @@ from linebot.exceptions import (
 from linebot.models import *
 
 #======python的函數庫==========
-import tempfile, os, re
+import tempfile, os, re, pyimgur
 import datetime
 import openai
 import time
@@ -21,18 +21,6 @@ static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
 # Channel Secret
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
-# OPENAI API Key初始化設定
-openai.api_key = os.getenv('OPENAI_API_KEY')
-
-
-def GPT_response(text):
-    # 接收回應
-    response = openai.Completion.create(model="text-davinci-003", prompt=text, temperature=0.5, max_tokens=500)
-    print(response)
-    # 重組回應
-    answer = response['choices'][0]['text'].replace('。','')
-    return answer
-
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -52,11 +40,18 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    #
+    CLIENT_ID = "9a88f1e57a71f9b"
+    PATH = "ch/image_0.jpg" #A Filepath to an image on your computer"
+    title = "image_0.jpg"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    #
     message = event.message.text
     if re.match('影片',message):
         video_message = VideoSendMessage(
             original_content_url='https://i.imgur.com/XVmZmIE.mp4',
-            preview_image_url='https://img.ttshow.tw/images/media/frontcover/2020/08/06/6.jpg'
+            preview_image_url=uploaded_image.link
         )
         line_bot_api.reply_message(event.reply_token, video_message)
     else:
