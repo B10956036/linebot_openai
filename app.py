@@ -9,7 +9,8 @@ from linebot.exceptions import (
 from linebot.models import *
 
 #======python的函數庫==========
-import tempfile, os, re, pyimgur
+import json
+import tempfile, os, re, pyimgur, requests
 import datetime
 import openai
 import time
@@ -46,12 +47,36 @@ def handle_message(event):
     title = "image_0.jpg"
     im = pyimgur.Imgur(CLIENT_ID)
     uploaded_image = im.upload_image(PATH, title=title)
+    
+    import requests
+    url = "https://api.imgur.com/3/upload"
+    payload = {'album': 'ALBUMID',
+    'type': 'file',
+    'disable_audio': '0'}
+    files = [
+      ('video', open('ch/output_1.mp4','rb'))
+    ]
+    headers = {
+      'Authorization': 'Bearer BEARERTOKENHERE'
+    }
+    response = requests.request("POST", url, headers=headers, data = payload, files = files)
+    if response.status_code == 200:
+        # 解析 JSON 响应
+        response_data = json.loads(response.text)
+        # 获取 "link" 值
+        link = response_data.get("data", {}).get("link")
+        if link:
+            print("Link:", link)
+        else:
+            print("Link not found in the response.")
+    else:
+        print("Request failed with status code:", response.status_code)
     #
     message = event.message.text
     if re.match('影片',message):
         video_message = VideoSendMessage(
-            original_content_url='https://i.imgur.com/XVmZmIE.mp4',
-            preview_image_url=uploaded_image.link
+            original_content_url = link,
+            preview_image_url = uploaded_image.link
         )
         line_bot_api.reply_message(event.reply_token, video_message)
     else:
