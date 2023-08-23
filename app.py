@@ -76,3 +76,8 @@ import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    # 指定新文件夹的路径
+    folder_path = 'ho'
+    
+    # 使用 os.makedirs() 创建文件夹，如果不存在则创建
+    os.makedirs(folder_path, exist_ok=True)
